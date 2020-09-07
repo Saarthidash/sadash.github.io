@@ -1,0 +1,193 @@
+<HTML>
+<HEAD> <TITLE>SA_Dash</TITLE> 
+<style type="text/css">
+body {background-color: black;}
+h1   {color: white;font-size:80px}
+#shadowBox {
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.2);
+    /* Black w/opacity/see-through */
+    border: 3px solid;
+}
+
+.rainbow {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 50px;
+    font-family: monospace;
+    letter-spacing: 5px;
+}
+.rainbow_text_animated {
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+}
+p {
+color : white;
+font-size : 40px;
+}
+ul {
+  display: block;
+  list-style-type: square;
+  margin-top: 1em;
+  margin-bottom: 1 em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 80px;
+  font-size : 30px;
+}
+li {
+  display: list-item;
+  color : gray
+}
+h2 {
+color : white;
+font-size : 80px;
+}
+h3 {
+color : blue;
+font-size : 20px;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+* {
+  box-sizing: border-box;
+}
+.right
+
+{float: right; }
+
+.left
+
+{float: left; }
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+ div.container {
+      display:inline-block;
+    }
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+</style>
+</head>
+<BODY>
+<p>&nbsp;</p>
+<h1 style = "text-align:center;"><b>Analytics Dashboard</b></h1>
+<div id="shadowBox">
+<h2 id = "main_menu" class="rainbow rainbow_text_animated"><b>Saarthi</b></h2>
+</div>
+<p>&nbsp;</p>
+<p style="color:white;">This page contains the following reports : </p>
+<p>&nbsp;</p>
+<ul>
+  <li style="color:white">Understanding Saarthi's <a href = "#user_growth">user growth </a></li>
+  <li style="color:white;">Activity metrics : Analysing <a href = "#incomplete_png">userbase </a>of <b><i>incomplete contests</b></i></li>
+  <li style="color:white;">Activity metrics : Analysing <a href = "#complete_png"> userbase of </a><b><i>complete contests</b></i></li>
+  <li style="color:white;">Histogram of users who have <b><i><a href = "#hist">completed contests</a></b></i></li> 
+  <li style="color:white;">Finding the details and reasons behind incomplete contests : examining the<a href = "#pattern"> drop off </a>question array</li>
+   <p>&nbsp;</p>
+  <li style="color:white;">Change the date range of the current dash to </li>
+  <ol>
+    <li><a href="10days.html" target="_blank">Last 10 days </a></li>
+	<li><a href="14days.html" target="_blank">Last 14 days </a></li>
+	<li><a href="30days.html" target="_blank">Last 30 days </a></li>
+	<li><a href="60days.html" target="_blank">Last 60 days </a></li>
+  </ol>
+ </ul>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+ 
+
+<h2 id="user_growth">Understanding Saarthi's user growth</h2>
+ <p>&nbsp;</p> 
+ <p> 
+ <ul>
+  <li> Source : Db </li>
+  <li> # of new users acquired on the platform for the past 21 days </li>
+  <li> Would be best if the ongoing growth experiments are indexed to understand the outcome of each. 
+</ul>
+<p>&nbsp;</p> 
+</p>
+  <IMG SRC="C:\Users\gouri\Desktop\HTML\avoid gs\new_user_for_21.png" align="middle" width = "800" height = "600"/>
+Go back to <a href = "#main_menu">main menu </a>
+</h3>
+<p>&nbsp;</p> 
+<p>&nbsp;</p>
+<h2 id="incomplete_png">Activity metrics : Analysing userbase of <b><i>incomplete contests</b></i></h2>
+ <p>&nbsp;</p> 
+ <p> 
+ <ul>
+  <li> Source : Db </li>
+  <li> Total # of incomplete contests for that day --> % of returning || % of new users (for that day) </li>
+  <li> Last 21 days data  </li>
+  <li> # of new users on that day, has been added for reference </li>  
+</ul>
+<p>&nbsp;</p> 
+</p>
+  <IMG SRC="C:\Users\gouri\Desktop\HTML\avoid gs\incomplete_for21.png" align="middle" width = "600" height = "700"/>
+Go back to <a href = "#main_menu">main menu </a>
+</h3> 
+<h2 id="complete_png">Activity metrics : Analysing userbase of <b><i>complete contests</b></i></h2>
+ <p>&nbsp;</p> 
+ <p> 
+ <ul>
+  <li> Source : Db </li>
+  <li> Total # of completed contests for that day --> % of returning || % of new users (for that day) </li>
+  <li> Last 21 days data highlighting the cohort </li>
+  <li> # of new users on that day, has been added for reference </li>  
+</ul>
+<p>&nbsp;</p> 
+</p>
+  <IMG SRC="C:\Users\gouri\Desktop\HTML\avoid gs\completed_for21.png" align="middle" width = "600" height = "700"/>
+Go back to <a href = "#main_menu">main menu </a>
+<h2 id="pattern">Finding the details and reasons behind incomplete contests : examining the drop off question array</b></i></h2>
+ <p>&nbsp;</p> 
+ <p> 
+ <ul>
+  <li> Source : Db </li>
+  <li> Dataset used for calculating : comprises of users who did not complete a contest(i.e, <10 questions answered) </li>
+  <li> Finding the max,min,avg and mode for all the contests that take place in a day </li> 
+  <li> distinct(date) --> {N of contests} ---> [max,min,avg,mode] </li> 
+  <li> Last 21 days data  </li> 
+</ul>
+<p>&nbsp;</p> 
+</p>
+  <IMG SRC="C:\Users\gouri\Desktop\HTML\avoid gs\pattern_for21.png" align="middle" width = "1000" height = "700"/>
+Go back to <a href = "#main_menu">main menu </a>
+</h3>
+</BODY>
+</HTML>
