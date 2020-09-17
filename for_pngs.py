@@ -167,3 +167,25 @@ def drop_off():
 
 
 drop_off()
+
+
+def retention_measure():
+    ret = retention()
+    raw_data = pd.DataFrame(ret,columns=['Week no','Week 0','Week 1','Week 2','Week 3','Week 4','Week 5','Week 6','Week 7','Week 8'])
+    print(raw_data)
+    list1 = [100,round(((raw_data['Week 1'].sum()/raw_data['Week 0'].sum())*100),2),round(((raw_data['Week 2'].sum()/raw_data['Week 0'].sum())*100),2),round(((raw_data['Week 4'].sum()/raw_data['Week 0'].sum())*100),2),round(((raw_data['Week 8'].sum()/raw_data['Week 0'].sum())*100),2)]
+    print(list1)
+    fig, ax = plt.subplots()
+    ax.set_xticks([0,7,14,30,60])
+    K=[0,7,14,30,60]
+    ax.set_xticklabels(['Day0','Day7','Day14','Day30','Day60'])
+    plt.ylim(0,110)
+    plt.plot(K,list1,color='red')
+    plt.xticks(rotation=45,ha='right',rotation_mode='anchor',weight = 'bold')
+    for a,b in zip(K, list1): 
+        plt.text(a, b, str(b))
+    plt.xlabel("Dates")
+    plt.ylabel("Retention %")
+    plt.title("Retention")
+    plt.savefig("retention.png")
+retention_measure()
