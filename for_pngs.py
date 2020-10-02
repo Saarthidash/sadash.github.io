@@ -190,6 +190,6 @@ def retention_measure():
     plt.xlabel("Dates")
     plt.ylabel("Retention %")
     plt.title("Retention")
-    plt.show()
+    #plt.show()
     plt.savefig("retention.png")
 retention_measure()
