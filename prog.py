@@ -86,14 +86,27 @@ pattern()
 print("pattern done")
 ################################################################################################################################
 con6=appconnection()
-def retention():
+def week_retention():
 	try:
-		query = con5.cursor()
-		query.execute('SELECT first_week,SUM(CASE WHEN week_number = 0 THEN 1 ELSE 0 END) as week_0,SUM(CASE WHEN week_number = 1 THEN 1 ELSE 0 END) as week_1,SUM(CASE WHEN week_number = 2 THEN 1 ELSE 0 END) as week_2,SUM(CASE WHEN week_number = 3 THEN 1 ELSE 0 END) as week_3,SUM(CASE WHEN week_number = 4 THEN 1 ELSE 0 END) as week_4,SUM(CASE WHEN week_number = 5 THEN 1 ELSE 0 END) as week_5,SUM(CASE WHEN week_number = 6 THEN 1 ELSE 0 END) as week_6,SUM(CASE WHEN week_number = 7 THEN 1 ELSE 0 END) as week_7,SUM(CASE WHEN week_number = 8 THEN 1 ELSE 0 END) as week_8 FROM (SELECT a.aid,a.login_week,b.first_week as first_week,a.login_week-first_week as week_number FROM(SELECT c."studentId" as aid,EXTRACT(WEEK FROM c."date") as login_week FROM "ContestParticipants" as c GROUP BY c."studentId",EXTRACT(WEEK FROM c."date"))a,(SELECT c."studentId" as bid,MIN(EXTRACT(WEEK FROM c."date")) as first_week FROM "ContestParticipants" as c GROUP BY c."studentId")b WHERE a.aid=b.bid) as with_week_number GROUP BY first_week ORDER BY first_week')
+		query = con6.cursor()
+		query.execute('SELECT first_week,SUM(CASE WHEN week_number = 0 THEN 1 ELSE 0 END) as week_0,SUM(CASE WHEN week_number = 1 THEN 1 ELSE 0 END) as week_1,SUM(CASE WHEN week_number = 2 THEN 1 ELSE 0 END) as week_2,SUM(CASE WHEN week_number = 3 THEN 1 ELSE 0 END) as week_3,SUM(CASE WHEN week_number = 4 THEN 1 ELSE 0 END) as week_4,SUM(CASE WHEN week_number = 6 THEN 1 ELSE 0 END) as week_6,SUM(CASE WHEN week_number = 9 THEN 1 ELSE 0 END) as week_9,SUM(CASE WHEN week_number = 13 THEN 1 ELSE 0 END) as week_13,SUM(CASE WHEN week_number = 18 THEN 1 ELSE 0 END) as week_18 FROM (SELECT a.aid,a.login_week,b.first_week as first_week,a.login_week-first_week as week_number FROM (SELECT c."studentId" as aid,EXTRACT(WEEK FROM c."date") as login_week FROM "ContestParticipants" as c GROUP BY c."studentId",EXTRACT(WEEK FROM c."date")) a,(SELECT c."studentId" as bid,MIN(EXTRACT(WEEK FROM c."date")) as first_week FROM "ContestParticipants" as c GROUP BY c."studentId")b WHERE a.aid=b.bid) as with_week_number GROUP BY first_week ORDER BY first_week')
 		ret = query.fetchall()
 		#print(ret)
 		return ret
 	except:
 		return 0
-retention()
-print("retention done")
+week_retention()
+print("week retention done")
+################################################################################################################################
+con7=appconnection()
+def day_retention():
+	try:
+		query = con7.cursor()
+		query.execute('SELECT first_day,SUM(CASE WHEN day_number = 0 THEN 1 ELSE 0 END) as day_0,SUM(CASE WHEN day_number = 1 THEN 1 ELSE 0 END) as day_1 FROM (SELECT a.aid,a.login_day,b.first_day as first_day,a.login_day-first_day as day_number FROM (SELECT c."studentId" as aid,EXTRACT(DOY FROM c."date") as login_day FROM "ContestParticipants" as c GROUP BY c."studentId",EXTRACT(DOY FROM c."date")) a,(SELECT c."studentId" as bid,MIN(EXTRACT(DOY FROM c."date")) as first_day FROM "ContestParticipants" as c GROUP BY c."studentId")b WHERE a.aid=b.bid) as with_day_number GROUP BY first_day ORDER BY first_day')
+		ret = query.fetchall()
+		#print(ret)
+		return ret
+	except:
+		return 0
+day_retention()
+print("day retention done")

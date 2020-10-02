@@ -170,15 +170,18 @@ drop_off()
 
 
 def retention_measure():
-    ret = retention()
-    raw_data = pd.DataFrame(ret,columns=['Week no','Week 0','Week 1','Week 2','Week 3','Week 4','Week 5','Week 6','Week 7','Week 8'])
-    print(raw_data)
-    list1 = [100,round(((raw_data['Week 1'].sum()/raw_data['Week 0'].sum())*100),2),round(((raw_data['Week 2'].sum()/raw_data['Week 0'].sum())*100),2),round(((raw_data['Week 4'].sum()/raw_data['Week 0'].sum())*100),2),round(((raw_data['Week 8'].sum()/raw_data['Week 0'].sum())*100),2)]
+    wret = week_retention()
+    dret = day_retention()
+    raw_data1 = pd.DataFrame(wret,columns=['Week no','Week 0','Week 1','Week 2','Week 3','Week 4','Week 6','Week 9','Week 13','Week 18'])
+    raw_data2 = pd.DataFrame(dret,columns=['Day no','Day 0','Day 1'])
+    print(raw_data1)
+    print(raw_data2)
+    list1 = [100,round(((raw_data2['Day 1'].sum()/raw_data2['Day 0'].sum())*100),2),round(((raw_data1['Week 1'].sum()/raw_data1['Week 0'].sum())*100),2),round(((raw_data1['Week 2'].sum()/raw_data1['Week 0'].sum())*100),2),round(((raw_data1['Week 3'].sum()/raw_data1['Week 0'].sum())*100),2),round(((raw_data1['Week 4'].sum()/raw_data1['Week 0'].sum())*100),2),round(((raw_data1['Week 6'].sum()/raw_data1['Week 0'].sum())*100),2),round(((raw_data1['Week 9'].sum()/raw_data1['Week 0'].sum())*100),2),round(((raw_data1['Week 13'].sum()/raw_data1['Week 0'].sum())*100),2),round(((raw_data1['Week 18'].sum()/raw_data1['Week 0'].sum())*100),2)]
     print(list1)
     fig, ax = plt.subplots()
-    ax.set_xticks([0,7,14,30,60])
-    K=[0,7,14,30,60]
-    ax.set_xticklabels(['Day0','Day7','Day14','Day30','Day60'])
+    ax.set_xticks([0,1,7,14,21,30,45,60,90,120])
+    K=[0,1,7,14,21,30,45,60,90,120]
+    ax.set_xticklabels(['Day 0','Day1','Day7','Day14','Day21','Day30','Day45','Day60','Day90','Day120'])
     plt.ylim(0,110)
     plt.plot(K,list1,color='red')
     plt.xticks(rotation=45,ha='right',rotation_mode='anchor',weight = 'bold')
@@ -187,5 +190,6 @@ def retention_measure():
     plt.xlabel("Dates")
     plt.ylabel("Retention %")
     plt.title("Retention")
+    plt.show()
     plt.savefig("retention.png")
 retention_measure()
