@@ -76,9 +76,9 @@ con5=appconnection()
 def pattern():
 	try:
 		query = con5.cursor()
-		query.execute('SELECT DATE(c."date"),MAX(json_array_length(response :: json)) as max_, MIN(json_array_length(response :: json)) as min_,AVG(json_array_length(response :: json)) as avg_ FROM public."ContestParticipants" as c INNER JOIN public."User" as u  ON c."studentId" = u.id WHERE c."studentId" NOT IN (\'{}\',\'{}\',\'{}\',\'{}\',\'{}\') AND json_array_length(response :: json) < 10 GROUP BY DATE(c."date")'.format("ck8h06t3h00054q2bz60ukhcd","ck8h0bexe00074q2bbrsl1psj","ck99hp3ai51084m611octlxny","ck8h0b8cc00064q2bqpianua9","ck8h06n8s00044q2bujzgx7zr"))
+		query.execute('SELECT b.return_date,a.max_n,b.max_r,a.min_n,b.min_r,a.avg_n,b.avg_r FROM (SELECT DATE(c."date") as new_date,MAX(json_array_length(response :: json)) as max_n, MIN(json_array_length(response :: json)) as min_n,AVG(json_array_length(response :: json)) as avg_n FROM "ContestParticipants" as c INNER JOIN "User" as u ON c."studentId" = u.id AND json_array_length(response :: json) < 10 AND DATE(c."date") = DATE(u."createdAt") GROUP BY DATE(c."date"))a FULL JOIN (SELECT DATE(c."date") as return_date, MAX(json_array_length(response :: json)) as max_r, MIN(json_array_length(response :: json)) as min_r, AVG(json_array_length(response :: json)) as avg_r  FROM "ContestParticipants" as c INNER JOIN "User" as u  ON c."studentId" = u.id  AND json_array_length(response :: json) < 10 AND DATE(c."date") != DATE(u."createdAt") GROUP BY DATE(c."date"))b on a.new_date = b.return_date')
 		pat = query.fetchall()
-		#print(teacher)
+		#print(pat)
 		return pat
 	except:
 		return 0
